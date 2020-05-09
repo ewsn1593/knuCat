@@ -16,7 +16,7 @@ def show_catphoto(request):
             image = form.cleaned_data['image']
             CL_v3 = tf.keras.models.load_model(os.path.join(os.path.dirname(__file__), 'CL_3.h5'))
             image = Image.open(image).resize((300,300))
-            target = np.asarray(image)
+            target = np.asarray(image) / 255.0
             target = np.expand_dims(target, axis=0)
             tf.keras.backend.clear_session()
             predict = CL_v3(target)
